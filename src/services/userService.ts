@@ -1,5 +1,5 @@
-import axiosInstance from '../api/axiosInstance';
-import type { IUserProfile, IUserUpdateProfile } from '../interfaces/user';
+import axiosInstance from "../api/axiosInstance";
+import type { IUserProfile, IUserUpdateProfile } from "../interfaces/user";
 
 const UserService = {
   /**
@@ -7,10 +7,11 @@ const UserService = {
    */
   getProfile: async (): Promise<IUserProfile> => {
     try {
-      const response = await axiosInstance.get('/users/profile');
+      const response = await axiosInstance.get("/users/profile");
       return response.data;
     } catch (error) {
-      throw error;
+      console.error(error);
+      return Promise.reject(error);
     }
   },
 
@@ -19,10 +20,12 @@ const UserService = {
    */
   updateProfile: async (payload: IUserUpdateProfile): Promise<IUserProfile> => {
     try {
-      const response = await axiosInstance.put('/users/profile', payload);
+      const response = await axiosInstance.put("/users/profile", payload);
       return response.data;
     } catch (error) {
-      throw error;
+      console.error(error);
+      return Promise.reject(error);
+
     }
   },
 
@@ -31,11 +34,11 @@ const UserService = {
    */
   deleteAccount: async (): Promise<void> => {
     try {
-      await axiosInstance.delete('/users/account');
+      await axiosInstance.delete("/users/account");
     } catch (error) {
-      throw error;
+      console.error(error);
     }
-  }
+  },
 };
 
 export default UserService;

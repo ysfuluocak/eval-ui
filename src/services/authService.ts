@@ -10,7 +10,8 @@ const AuthService = {
       const response = await axiosInstance.post("/auth/login", payload);
       return response.data;
     } catch (error) {
-      throw error;
+      console.error(error);
+      return Promise.reject(error);
     }
   },
 
@@ -22,7 +23,8 @@ const AuthService = {
       const response = await axiosInstance.post("/auth/register", payload);
       return response.data;
     } catch (error) {
-      throw error;
+      console.error(error);
+      return Promise.reject(error);
     }
   },
 
@@ -34,7 +36,8 @@ const AuthService = {
       await axiosInstance.post("/auth/logout");
       localStorage.removeItem("authToken");
     } catch (error) {
-      throw error;
+      console.error(error);
+      return Promise.reject(error);
     }
   },
 
@@ -46,7 +49,8 @@ const AuthService = {
       const response = await axiosInstance.post("/auth/refresh-token");
       return response.data;
     } catch (error) {
-      throw error;
+      console.error(error);
+      return Promise.reject(error);
     }
   },
 };
